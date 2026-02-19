@@ -1,0 +1,17 @@
+<div class="entra-container">
+
+  <button class="btn" (click)="login()">Sign in with Entra ID</button>
+
+  <ng-container *ngIf="isAuthenticated$ | async">
+    <button class="btn primary" (click)="callApi()" [disabled]="loading">
+      {{ loading ? 'Calling API…' : 'Call Test API' }}
+    </button>
+  </ng-container>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <pre *ngIf="lastApiResult" class="result">
+{{ lastApiResult | json }}
+  </pre>
+</div>
+

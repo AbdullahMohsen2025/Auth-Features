@@ -1,0 +1,270 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "UAEPassPOC.API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/UAEPass/callback": {
+      "get": {
+        "tags": [
+          "UAEPass"
+        ],
+        "parameters": [
+          {
+            "name": "accessCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassAuthResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassAuthResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassAuthResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UAEPass/is-enabled": {
+      "get": {
+        "tags": [
+          "UAEPass"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UAEPass/config": {
+      "get": {
+        "tags": [
+          "UAEPass"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassFrontendConfig"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassFrontendConfig"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UaePassFrontendConfig"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UAEPass/test-token": {
+      "get": {
+        "tags": [
+          "UAEPass"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UaePassAuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "userInfo": {
+            "$ref": "#/components/schemas/UaePassResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UaePassFrontendConfig": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "scope": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "acrValues": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UaePassResponseDto": {
+        "type": "object",
+        "properties": {
+          "sub": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullnameAR": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastnameEN": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullnameEN": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastnameAR": {
+            "type": "string",
+            "nullable": true
+          },
+          "idn": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalityEN": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstnameEN": {
+            "type": "string",
+            "nullable": true
+          },
+          "userType": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalityAR": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstnameAR": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "error_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "UAEPass"
+    }
+  ]
+}

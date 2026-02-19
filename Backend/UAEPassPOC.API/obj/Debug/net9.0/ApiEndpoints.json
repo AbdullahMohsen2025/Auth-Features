@@ -1,0 +1,92 @@
+[
+  {
+    "ContainingType": "UAEPassPOC.API.Controllers.UAEPassController",
+    "Method": "UAEPassCallback",
+    "RelativePath": "api/UAEPass/callback",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accessCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "state",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "UAEPassPOC.API.Models.UaePassAuthResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "UAEPassPOC.API.Controllers.UAEPassController",
+    "Method": "GetUAEPassConfig",
+    "RelativePath": "api/UAEPass/config",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "UAEPassPOC.API.Services.UaePassFrontendConfig",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UAEPassPOC.API.Controllers.UAEPassController",
+    "Method": "CheckUAEPassEnabled",
+    "RelativePath": "api/UAEPass/is-enabled",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "UAEPassPOC.API.Controllers.UAEPassController",
+    "Method": "TestToken",
+    "RelativePath": "api/UAEPass/test-token",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

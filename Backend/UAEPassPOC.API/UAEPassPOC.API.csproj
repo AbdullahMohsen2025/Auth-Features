@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.2" />
+  </ItemGroup>
+
+  <Target Name="KillRunningProcess" BeforeTargets="PreBuildEvent">
+    <Exec Command="powershell -Command &quot;Get-Process | Where-Object { $_.ProcessName -eq 'UAEPassPOC.API' } | Stop-Process -Force -ErrorAction SilentlyContinue&quot;" ContinueOnError="true" />
+  </Target>
+
+</Project>

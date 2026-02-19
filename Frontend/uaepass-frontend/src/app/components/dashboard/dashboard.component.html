@@ -1,0 +1,91 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Welcome to UAE Pass POC Dashboard</h1>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="user-profile" *ngIf="userInfo">
+    <div class="profile-header">
+      <div class="avatar">
+        {{ displayName.charAt(0).toUpperCase() }}
+      </div>
+      <h2>{{ displayName }}</h2>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card" *ngIf="userInfo.email">
+        <div class="info-label">Email</div>
+        <div class="info-value">{{ userInfo.email }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.mobile">
+        <div class="info-label">Mobile</div>
+        <div class="info-value">{{ userInfo.mobile }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.gender">
+        <div class="info-label">Gender</div>
+        <div class="info-value">{{ userInfo.gender }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.nationalityEN">
+        <div class="info-label">Nationality</div>
+        <div class="info-value">{{ userInfo.nationalityEN }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.idn">
+        <div class="info-label">Emirates ID</div>
+        <div class="info-value">{{ userInfo.idn }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.uuid">
+        <div class="info-label">UUID</div>
+        <div class="info-value">{{ userInfo.uuid }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.sub">
+        <div class="info-label">Subject ID</div>
+        <div class="info-value">{{ userInfo.sub }}</div>
+      </div>
+
+      <div class="info-card" *ngIf="userInfo.userType">
+        <div class="info-label">User Type</div>
+        <div class="info-value">{{ userInfo.userType }}</div>
+      </div>
+    </div>
+
+    <div class="arabic-names" *ngIf="userInfo.firstnameAR || userInfo.lastnameAR">
+      <h3>Arabic Name</h3>
+      <p class="arabic-text">
+        {{ userInfo.fullnameAR || (userInfo.firstnameAR + ' ' + userInfo.lastnameAR) }}
+      </p>
+    </div>
+
+    <div class="success-message">
+      <p>✅ Successfully authenticated with UAE Pass!</p>
+    </div>
+  </div>
+
+  <!-- NEW SECTION: API Testing -->
+  <div class="api-test-section" *ngIf="userInfo">
+    <h3>🔐 Test Protected API</h3>
+    <p>Click the button below to send the Access Token to the backend.</p>
+
+    <div class="button-wrapper">
+      <button class="api-btn" (click)="callProtectedApi()" [disabled]="apiLoading">
+        {{ apiLoading ? 'Sending...' : 'Call Backend API' }}
+      </button>
+    </div>
+
+    <!-- Success Message -->
+    <div class="api-result success" *ngIf="apiResponse">
+      <strong>Backend Response:</strong> <br>
+      {{ apiResponse }}
+    </div>
+
+    <!-- Error Message -->
+    <div class="api-result error" *ngIf="apiError">
+      ❌ {{ apiError }}
+    </div>
+  </div>
+</div>
