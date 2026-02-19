@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
     this.uaepassService.getConfig().subscribe({
       next: (config) => {
         this.configLoading = false;
-        console.log('UAE Pass Config received:', config);
+        console.log('FrontEnd Config received:', config);
 
         if (!config) {
           this.configError = 'configs are missed';
@@ -71,7 +71,6 @@ export class DashboardComponent implements OnInit {
       'User';
   }
 
-  /** Call the new backend API */
   callProtectedApi(): void {
     if (!this.accessToken) {
       debugger

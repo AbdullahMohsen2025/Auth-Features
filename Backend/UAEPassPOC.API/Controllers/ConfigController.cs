@@ -6,17 +6,18 @@ namespace UAEPassPOC.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UAEPassController : ControllerBase
+public class ConfigController : ControllerBase
 {
-    private readonly ILogger<UAEPassController> _logger;
-    private readonly IUaePassService _uaePassService;
+    private readonly ILogger<ConfigController> _logger;
+    private readonly IFrontendConfigService _configService;
 
-    public UAEPassController(
-        ILogger<UAEPassController> logger,
-        IUaePassService uaePassService)
+
+    public ConfigController(
+        ILogger<ConfigController> logger,
+        IFrontendConfigService configService)
     {
         _logger = logger;
-        _uaePassService = uaePassService;
+        _configService = configService;
     }
 
     /// <summary>
@@ -32,7 +33,7 @@ public class UAEPassController : ControllerBase
         try
         {
             // 1. Get Token
-            var tokenResult = await _uaePassService.GetAccessTokenAsync(accessCode, cancellationToken);
+            var tokenResult = await _configService.GetAccessTokenAsync(accessCode, cancellationToken);
 
             if (!string.IsNullOrEmpty(tokenResult.error))
             {
@@ -41,7 +42,7 @@ public class UAEPassController : ControllerBase
             }
 
             // 2. Get User Info
-            var userInfoResult = await _uaePassService.GetUserInfoAsync(tokenResult.access_token!, cancellationToken);
+            var userInfoResult = await _configService.GetUserInfoAsync(tokenResult.access_token!, cancellationToken);
 
             if (!string.IsNullOrWhiteSpace(userInfoResult.Error))
             {
@@ -80,17 +81,18 @@ public class UAEPassController : ControllerBase
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     public ActionResult<bool> CheckUAEPassEnabled()
     {
-        return Ok(_uaePassService.IsEnabled);
+        return Ok(_configService.IsEnabled);
     }
 
     /// <summary>
     /// Get UAE Pass configuration for frontend / any client.
     /// </summary>
-    [HttpGet("config")]
-    [ProducesResponseType(typeof(UaePassFrontendConfig), StatusCodes.Status200OK)]
-    public ActionResult<UaePassFrontendConfig> GetUAEPassConfig()
+    [HttpGet("frontend-config")]
+    [ProducesResponseType(typeof(FrontendConfigDto), StatusCodes.Status200OK)]
+
+    public ActionResult<FrontendConfigDto> GetFrontendConfig()
     {
-        return Ok(_uaePassService.GetFrontendConfig());
+        return Ok(_configService.GetFrontendConfig());
     }
 
     /// <summary>

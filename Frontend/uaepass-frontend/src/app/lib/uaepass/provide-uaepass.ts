@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { UAE_PASS_OPTIONS, UaePassOptions } from './uaepass-options';
+import { Config_OPTIONS, ConfigOptions } from './config-options';
 
 /**
  * Provide UAE Pass service with options. Use in any Angular app:
@@ -9,15 +9,15 @@ import { UAE_PASS_OPTIONS, UaePassOptions } from './uaepass-options';
  *   export const appConfig: ApplicationConfig = {
  *     providers: [
  *       provideHttpClient(),
- *       provideUaePass({ apiBaseUrl: 'https://localhost:7034/api/UAEPass' })
+ *       provideUaePass({ apiBaseUrl: 'https://localhost:7034/api/Config' })
  *     ]
  *   };
  *
  * Then inject UaePassService wherever needed.
  */
-export function provideUaePass(options: UaePassOptions): Provider {
+export function provideUaePass(options: ConfigOptions): Provider {
   return {
-    provide: UAE_PASS_OPTIONS,
+    provide: Config_OPTIONS,
     useValue: options
   };
 }

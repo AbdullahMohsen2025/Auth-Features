@@ -5,7 +5,7 @@ namespace UAEPassPOC.API.Services;
 /// <summary>
 /// Reusable UAE Pass service contract. Implement or inject in any .NET app.
 /// </summary>
-public interface IUaePassService
+public interface IFrontendConfigService
 {
     /// <summary>Exchange authorization code for access token.</summary>
     Task<UAEPassTokenDetailsDto> GetAccessTokenAsync(string code, CancellationToken cancellationToken = default);
@@ -17,11 +17,30 @@ public interface IUaePassService
     bool IsEnabled { get; }
 
     /// <summary>Frontend config (login URL, logout URL) for client apps.</summary>
-    UaePassFrontendConfig GetFrontendConfig();
+    FrontendConfigDto GetFrontendConfig();
+}
+
+public class FrontendConfigDto
+{
+    public EntraIdConfigDto EntraID { get; set; } = new();
+    public UaePassFrontendConfig UaePass { get; set; } = new();
 }
 
 /// <summary>
-/// DTO for frontend / any client that needs UAE Pass endpoints.
+/// DTO for EntraIdfrontend / any client that needs EntraId endpoints.
+/// </summary>
+public class EntraIdConfigDto
+{
+    public string Instance { get; set; } = string.Empty;
+    public string TenantId { get; set; } = string.Empty;
+    public string ClientId { get; set; } = string.Empty;
+    public string RedirectUrl { get; set; } = string.Empty;
+    public string Scopes { get; set; } = string.Empty;
+    public string Authority => $"{Instance}{TenantId}";
+}
+
+/// <summary>
+/// DTO for UaePassFrontend / any client that needs UAE Pass endpoints.
 /// </summary>
 public class UaePassFrontendConfig
 {

@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using UAEPassPOC.API.Configuration;
 using UAEPassPOC.API.Services;
 
@@ -19,8 +17,10 @@ public static class UaePassServiceExtensions
     public static IServiceCollection AddUaePass(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<UaePassSettings>(configuration.GetSection("UaePass"));
+        services.Configure<EntraSettings>(configuration.GetSection("EntraID"));
         services.AddScoped<UaePassClient>();
-        services.AddScoped<IUaePassService, UaePassService>();
+        services.AddScoped<IFrontendConfigService, FrontendConfigService>();
+
         return services;
     }
 }

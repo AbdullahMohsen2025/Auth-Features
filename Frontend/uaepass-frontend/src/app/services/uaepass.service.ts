@@ -1,7 +1,7 @@
 import { Injectable, Inject, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DEFAULT_UAE_PASS_OPTIONS, UAE_PASS_OPTIONS, UaePassOptions } from '../lib/uaepass';
+import { Config_OPTIONS, ConfigOptions, DEFAULT_Config_OPTIONS } from '../lib/uaepass';
 
 export interface UaePassConfig {
   clientId: string;
@@ -41,24 +41,24 @@ export interface UaePassUserInfo {
  */
 @Injectable({ providedIn: 'root' })
 export class UaePassService {
-  private readonly options: UaePassOptions;
+  private readonly options: ConfigOptions;
   private get apiBaseUrl(): string {
     return this.options.apiBaseUrl.replace(/\/$/, '');
   }
   private get endpoints() {
-    return { ...DEFAULT_UAE_PASS_OPTIONS.endpoints, ...this.options.endpoints };
+    return { ...DEFAULT_Config_OPTIONS.endpoints, ...this.options.endpoints };
   }
 
   constructor(
     private http: HttpClient,
-    @Optional() @Inject(UAE_PASS_OPTIONS) options: UaePassOptions | null
+    @Optional() @Inject(Config_OPTIONS) options: ConfigOptions | null
   ) {
-    this.options = options ?? DEFAULT_UAE_PASS_OPTIONS;
+    this.options = options ?? DEFAULT_Config_OPTIONS;
   }
 
   /** Get UAE Pass configuration from backend (login URL, logout URL, etc.). */
   getConfig(): Observable<UaePassConfig> {
-    return this.http.get<UaePassConfig>(`${this.apiBaseUrl}/${this.endpoints!.config}`);
+    return this.http.get<UaePassConfig>(`${this.apiBaseUrl}/${this.endpoints!.frontendconfig}`);
   }
 
   /** Check if UAE Pass is enabled. */
