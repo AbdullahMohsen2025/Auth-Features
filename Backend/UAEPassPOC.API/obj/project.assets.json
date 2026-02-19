@@ -596,11 +596,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Study\\POCs\\UAEPass-POC\\UAEPass-POC\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
+      "projectUniqueName": "D:\\Study\\POCs\\Auth-Features\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
       "projectName": "UAEPassPOC.API",
-      "projectPath": "D:\\Study\\POCs\\UAEPass-POC\\UAEPass-POC\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
+      "projectPath": "D:\\Study\\POCs\\Auth-Features\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
       "packagesPath": "C:\\Users\\abdullah.abdelmohsen\\.nuget\\packages\\",
-      "outputPath": "D:\\Study\\POCs\\UAEPass-POC\\UAEPass-POC\\Backend\\UAEPassPOC.API\\obj\\",
+      "outputPath": "D:\\Study\\POCs\\Auth-Features\\Backend\\UAEPassPOC.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

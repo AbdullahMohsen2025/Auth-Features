@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QlZ38E/wpX8=",
+  "dgSpecHash": "/De+XwH9CIc=",
   "success": true,
-  "projectFilePath": "D:\\Study\\POCs\\UAEPass-POC\\UAEPass-POC\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
+  "projectFilePath": "D:\\Study\\POCs\\Auth-Features\\Backend\\UAEPassPOC.API\\UAEPassPOC.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\abdullah.abdelmohsen\\.nuget\\packages\\microsoft.extensions.apidescription.server\\9.0.0\\microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
     "C:\\Users\\abdullah.abdelmohsen\\.nuget\\packages\\microsoft.openapi\\2.4.1\\microsoft.openapi.2.4.1.nupkg.sha512",

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UAEPassPOC.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1327d58035b8088a554b5331e349241575d4927a")]
 [assembly: System.Reflection.AssemblyProductAttribute("UAEPassPOC.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UAEPassPOC.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

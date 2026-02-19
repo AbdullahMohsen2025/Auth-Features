@@ -1,3 +1,28 @@
+## Visual Studio
 .vs/
+*.user
+*.suo
+
+## Build folders
 bin/
 obj/
+Debug/
+Release/
+
+## .NET
+*.cache
+*.pdb
+*.dll
+*.exe
+
+## NuGet
+*.nupkg
+project.assets.json
+project.nuget.cache
+
+## Logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
