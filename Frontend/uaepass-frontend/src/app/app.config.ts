@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { provideUaePass } from './lib/uaepass'; // Your existing UaePass provider
 import { AppConfigService } from './services/app-config.service';
 
 // Factory function to load config
@@ -25,8 +24,5 @@ export const appConfig: ApplicationConfig = {
       multi: true
     },
 
-    // 2. Keep your existing UAE Pass logic 
-    // (Note: You could eventually update this to use the same config endpoint if desired)
-    provideUaePass({ apiBaseUrl: 'https://localhost:7034/api/Config' }) 
   ]
 };

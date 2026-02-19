@@ -9,7 +9,6 @@ import { lastValueFrom } from 'rxjs';
 export class AppConfigService {
   private config: FrontendConfig | null = null;
 
-  // Update this to match your backend API URL
   private readonly configUrl = 'https://localhost:7034/api/Config/frontend-config'; 
 
   constructor(private http: HttpClient) {}

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   PublicClientApplication,
   AccountInfo,
-  AuthenticationResult,
   Configuration,
   LogLevel
 } from '@azure/msal-browser';
@@ -98,7 +97,7 @@ export class EntraAuthService {
   async loginRedirect(): Promise<void> {
     await this.ensureInitialized();
     await this.msalInstance.loginRedirect({
-      scopes: this.getScopes() // Use dynamic scopes
+      scopes: this.getScopes()
     });
   }
 

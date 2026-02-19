@@ -1,7 +1,7 @@
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Config_OPTIONS, ConfigOptions, DEFAULT_Config_OPTIONS } from '../lib/uaepass';
+import { Observable, of } from 'rxjs';
+import { AppConfigService } from './app-config.service';
 
 export interface UaePassConfig {
   clientId: string;
@@ -35,42 +35,43 @@ export interface UaePassUserInfo {
   userType?: string;
 }
 
-/**
- * Reusable UAE Pass client service. Inject in any Angular app.
- * Provide config via provideUaePass({ apiBaseUrl: '...' }) in app.config.
- */
 @Injectable({ providedIn: 'root' })
 export class UaePassService {
-  private readonly options: ConfigOptions;
-  private get apiBaseUrl(): string {
-    return this.options.apiBaseUrl.replace(/\/$/, '');
-  }
-  private get endpoints() {
-    return { ...DEFAULT_Config_OPTIONS.endpoints, ...this.options.endpoints };
-  }
+  
+  // Define endpoint paths relative to the controller
+  private readonly endpoints = {
+    callback: 'callback',
+    testtoken: 'test-token',
+    isEnabled: 'is-enabled'
+  };
+
+  private readonly apiBaseUrl = 'https://localhost:7034/api/Config';
 
   constructor(
     private http: HttpClient,
-    @Optional() @Inject(Config_OPTIONS) options: ConfigOptions | null
-  ) {
-    this.options = options ?? DEFAULT_Config_OPTIONS;
+    private appConfig: AppConfigService // Central Config for static settings (Client ID, etc)
+  ) {}
+
+  /** 
+   * Get UAE Pass configuration.
+   */
+  getConfig(): Observable<UaePassConfig | undefined> {
+    return of(this.appConfig.uaePassConfig);
   }
 
-  /** Get UAE Pass configuration from backend (login URL, logout URL, etc.). */
-  getConfig(): Observable<UaePassConfig> {
-    return this.http.get<UaePassConfig>(`${this.apiBaseUrl}/${this.endpoints!.frontendconfig}`);
-  }
-
-  /** Check if UAE Pass is enabled. */
+  /** 
+   * Check if UAE Pass is enabled.
+   */
   isEnabled(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiBaseUrl}/${this.endpoints!.isEnabled}`);
+    return this.http.get<boolean>(`${this.apiBaseUrl}/${this.endpoints.isEnabled}`);
   }
 
   /** Handle callback: exchange code for user info via backend. */
   handleCallback(accessCode: string, state?: string): Observable<UaePassAuthResponse> {
     const params: Record<string, string> = { accessCode };
     if (state) params['state'] = state;
-    return this.http.get<UaePassAuthResponse>(`${this.apiBaseUrl}/${this.endpoints!.callback}`, { params });
+    
+    return this.http.get<UaePassAuthResponse>(`${this.apiBaseUrl}/${this.endpoints.callback}`, { params });
   }
 
   /** Store user info in session storage. */
@@ -93,14 +94,11 @@ export class UaePassService {
    * Calls the protected backend API using the Bearer token.
    */
   testProtectedApi(accessToken: string) {
-    // 1. Create headers
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${accessToken}`
     });
 
-    // 2. Make the call (expecting text response for this example)
-    return this.http.get(`${this.apiBaseUrl}/${this.endpoints!.testtoken}`, { 
-
+    return this.http.get(`${this.apiBaseUrl}/${this.endpoints.testtoken}`, { 
       headers: headers, 
       responseType: 'text' 
     });
